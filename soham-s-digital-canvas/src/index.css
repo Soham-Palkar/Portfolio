@@ -1,0 +1,158 @@
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+@layer base {
+  :root {
+    --background: 0 0% 4%;
+    --foreground: 0 0% 90%;
+    --card: 0 0% 6.7%;
+    --card-foreground: 0 0% 90%;
+    --card-elevated: 0 0% 10.2%;
+    --popover: 0 0% 6.7%;
+    --popover-foreground: 0 0% 90%;
+    --primary: 133 100% 50%;
+    --primary-foreground: 0 0% 4%;
+    --secondary: 0 0% 10.2%;
+    --secondary-foreground: 0 0% 90%;
+    --muted: 0 0% 10.2%;
+    --muted-foreground: 220 9% 46%;
+    --accent: 133 100% 40%;
+    --accent-foreground: 0 0% 4%;
+    --destructive: 0 84% 60%;
+    --destructive-foreground: 0 0% 90%;
+    --border: 0 0% 12%;
+    --input: 0 0% 12%;
+    --ring: 133 100% 50%;
+    --radius: 0.5rem;
+    --status-dev: 217 91% 60%;
+    --status-concept: 38 92% 50%;
+    --status-completed: 160 84% 39%;
+    --status-deployed: 263 70% 50%;
+  }
+}
+
+@layer base {
+  * {
+    @apply border-border;
+  }
+  html {
+    scroll-behavior: smooth;
+  }
+  body {
+    @apply bg-background text-foreground;
+    font-family: 'Inter', sans-serif;
+    background-image: radial-gradient(circle, hsl(0 0% 10.2%) 1px, transparent 1px);
+    background-size: 28px 28px;
+  }
+}
+
+@layer components {
+  .font-mono-display {
+    font-family: 'JetBrains Mono', monospace;
+  }
+
+  .text-accent-glow {
+    color: hsl(var(--primary));
+    text-shadow: 0 0 20px hsla(133, 100%, 50%, 0.3);
+  }
+
+  .card-surface {
+    @apply bg-card border border-border rounded-lg;
+    transition: all 250ms ease;
+  }
+
+  .card-surface:hover {
+    transform: translateY(-6px);
+    border-color: hsla(133, 100%, 50%, 0.4);
+    box-shadow: 0 0 20px hsla(133, 100%, 50%, 0.1);
+  }
+
+  .btn-primary-green {
+    @apply font-mono-display font-bold px-6 py-3 rounded-md;
+    background: hsl(var(--primary));
+    color: hsl(var(--background));
+    transition: all 200ms ease;
+  }
+  .btn-primary-green:hover {
+    transform: translateY(-2px);
+    box-shadow: 0 0 16px hsla(133, 100%, 50%, 0.3);
+  }
+  .btn-primary-green:active {
+    transform: scale(0.97) translateY(1px);
+  }
+
+  .btn-outline-green {
+    @apply font-mono-display font-bold px-6 py-3 rounded-md border;
+    border-color: hsl(var(--primary));
+    color: hsl(var(--primary));
+    background: transparent;
+    transition: all 200ms ease;
+  }
+  .btn-outline-green:hover {
+    transform: translateY(-2px);
+    box-shadow: 0 0 16px hsla(133, 100%, 50%, 0.3);
+    background: hsla(133, 100%, 50%, 0.08);
+  }
+  .btn-outline-green:active {
+    transform: scale(0.97) translateY(1px);
+  }
+
+  .skill-pill {
+    @apply text-sm px-3 py-1 rounded-md font-mono-display;
+    background: hsla(133, 100%, 50%, 0.08);
+    border: 1px solid hsla(133, 100%, 50%, 0.2);
+    color: hsl(var(--primary));
+  }
+
+  .section-label {
+    @apply font-mono-display text-sm mb-4 text-accent-glow;
+  }
+
+  .section-heading {
+    @apply font-mono-display text-3xl md:text-4xl font-bold text-foreground mb-8;
+  }
+
+  .scroll-reveal {
+    opacity: 0;
+    transform: translateY(30px);
+    transition: opacity 500ms ease-out, transform 500ms ease-out;
+  }
+  .scroll-reveal.visible {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
+
+@keyframes blink {
+  0%, 100% { opacity: 1; }
+  50% { opacity: 0; }
+}
+@keyframes bounce-arrow {
+  0%, 100% { transform: translateY(0); }
+  50% { transform: translateY(8px); }
+}
+@keyframes status-pulse {
+  0%, 100% { opacity: 1; }
+  50% { opacity: 0.5; }
+}
+
+.animate-blink {
+  animation: blink 1s step-end infinite;
+}
+.animate-bounce-arrow {
+  animation: bounce-arrow 1.5s ease-in-out infinite;
+}
+.animate-status-pulse {
+  animation: status-pulse 2.5s ease-in-out infinite;
+}
+
+#scroll-progress {
+  position: fixed;
+  top: 0;
+  left: 0;
+  height: 3px;
+  background: hsl(var(--primary));
+  z-index: 9999;
+  transition: width 50ms linear;
+}
